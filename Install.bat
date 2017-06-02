@@ -8,6 +8,9 @@ echo "C:\Program Files\Steam\steamapps\common\Skyrim Special Edition"
 echo.
 set /p gamedir=Game directory: 
 
+::making links doesn't really work right now
+goto:make_copies
+
 echo.
 echo How would you like to install the ENB preset?
 echo.
