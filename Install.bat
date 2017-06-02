@@ -42,7 +42,7 @@ goto:finish
 :make_symlinks
 set origindir=%cd%\ENB
 if not exist %gamedir% mkdir "%gamedir%"
-cd %gamedir%
+cd /d %gamedir%
 
 ::make symbolic link for each folder
 for /d %%i in (%origindir%\*) do (
