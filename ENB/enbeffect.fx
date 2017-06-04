@@ -14,6 +14,20 @@ uniform float fBloom_Threshold <
     float UIMax = 6;
 > = 2.0;
 
+uniform float fLens_Intensity <
+	string UIName = "Lens Intensity";
+	string UIWidget = "spinner";
+	float UIMin = 0.0;
+	float UIMax = 1.0;
+> = 1.0;
+
+uniform float fLens_Threshold <
+	string UIName = "Lens Threshold";
+	string UIWidget = "spinner";
+	float UIMin = 1.0;
+	float UIMax = 10.0;
+> = 3.0;
+
 uniform float fAdapt_Sensitivity <
     string UIName = "Adaptation Sensitivity";
     string UIWidget = "Spinner";
@@ -73,11 +87,14 @@ float4 PS_Effect(
 ) : SV_Target {
     float4 col = float4(TextureColor.Sample(Sampler_Point, uv).rgb, fWhitePoint);
     float3 bloom = TextureBloom.Sample(Sampler_Linear, uv).rgb;
+	float3 lens = TextureLens.Sample(Sampler_Linear, uv).rgb;
+	
+	lens = pow(lens, fLens_Threshold) * fLens_Intensity;
+	
+	bloom += lens;
     bloom = pow(bloom, fBloom_Threshold) * fBloom_Intensity;
-    //bloom *= bloom; //a little bit of hardcoded thresholding won't hurt
     
     col.rgb = bDisplayBloom ? bloom : col.rgb + bloom;
-    //col.rgb += bloom * fBloom_Intensity;
 
     float exposure = TextureAdaptation.Sample(Sampler_Point, 0).x * fAdapt_Sensitivity;
     exposure = fExposure / max(exposure, 0.00001);

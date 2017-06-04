@@ -1,4 +1,5 @@
 #include "Magic/Common.fxh"
+#include "Magic/Blur.fxh"
 
 //Code ahead
 

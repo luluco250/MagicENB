@@ -1,4 +1,5 @@
 #include "Magic/Common.fxh"
+#include "Magic/Preprocessor.fxh"
 
 //This comes before bloom, effect and postpass
 //Used to be called enbprepass.fx for a reason
@@ -222,3 +223,10 @@ technique11 Magic4 {
 		SetPixelShader(CompileShader(ps_5_0, PS_LinearToGamma(TextureColor)));
 	}
 }
+
+/*technique11 Magic5 {
+	pass {
+		SetVertexShader(CompileShader(vs_5_0, VS_PostProcess()));
+		SetPixelShader(CompileShader(ps_5_0, PS_DisplayTexture(edgesTex)));
+	}
+}*/
