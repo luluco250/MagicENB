@@ -191,10 +191,10 @@ float4	PS_Adaptation(VS_OUTPUT_POST IN, float4 v0 : SV_Position0) : SV_Target
 	float	currmax=0.0;
 	const float	step=1.0/16.0;
 	const float	halfstep=0.5/16.0;
-	pos.x=halfstep;
+	pos.x=-0.5+halfstep;
 	for (int x=0; x<16; x++)
 	{
-		pos.y=halfstep;
+		pos.y=-0.5+halfstep;
 		for (int y=0; y<16; y++)
 		{
 			float	tempcurr=TextureCurrent.Sample(Sampler0, IN.txcoord0.xy + pos.xy).x;
